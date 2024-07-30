@@ -1,58 +1,53 @@
-# Déploiement d’une Application WordPress sur ECS
+# Deployment of a Front & Back App on ECS
 
-## Coûts estimation :
+![](<Deploy Worspress ECS.png>)
 
-## Fonctionnalités :
-- Déploiement d’une application front-end et back-end
+## Cost Estimation:
+
+## Features:
+- Deployment of a front-end and back-end application
 - Auto scaling
-- Load Balancing
-- Persistance des données
+- Load balancing
+- Data persistence
 
-## Services :
-- **VPC (Virtual Private Cloud)** : Fournit un réseau isolé dans le cloud, permettant de définir des sous-réseaux, des règles de sécurité, et des connexions à Internet.
-  
-- **SUBNET (Sous-réseau)** : Divise un VPC en segments plus petits pour organiser les ressources et gérer la sécurité.
+## Services:
 
-- **INTERNET GATEWAY** : Permet la communication entre les ressources dans un VPC et Internet.
+### Networking
+- **VPC (Virtual Private Cloud)**: Provides an isolated network in the cloud, allowing the definition of subnets, security rules, and Internet connections.
+- **SUBNET**: Divides a VPC into smaller segments to organize resources and manage security.
+- **INTERNET GATEWAY**: Enables communication between resources in a VPC and the Internet.
+- **EIP (Elastic IP)**: A static IP address that can be associated with an instance to make it accessible on the Internet.
+- **ALB (Application Load Balancer)**: Distributes incoming traffic among multiple targets (EC2 instances, containers, etc.) and allows content-based routing.
+- **ACL (Access Control List)**: Defines security rules to control incoming and outgoing traffic at the subnet level.
+- **NAT (Network Address Translation)**: Allows instances in a private subnet to access the Internet without exposing their IP addresses.
+- **ROUTE (Route Table)**: Defines routing rules to direct traffic between subnets and to the Internet.
+- **SECURITY GROUP**: Acts as a virtual firewall to control incoming and outgoing traffic for instances.
 
-- **EIP (Elastic IP)** : Adresse IP statique qui peut être associée à une instance pour la rendre accessible sur Internet.
+### Service Discovery and Management
+- **CLOUDMAP**: A service discovery service that allows applications to find and connect to other services.
+- **ROUTE 53**: A DNS service that manages domain names and directs traffic to AWS resources.
 
-- **ALB (Application Load Balancer)** : Distribue le trafic entrant entre plusieurs cibles (instances EC2, conteneurs, etc.) et permet de gérer le routage basé sur le contenu.
+### Containers and Orchestration
+- **ECS (Elastic Container Service)**: A container orchestration service that simplifies the deployment and management of containerized applications.
+- **Task**: A unit of work in ECS that defines a set of containers to run together.
+- **Task Definition**: A model that defines the parameters for ECS tasks, including container images, resources, and network configurations.
 
-- **ACL (Access Control List)** : Définit des règles de sécurité pour contrôler le trafic entrant et sortant au niveau des sous-réseaux.
+### Security
+- **SECRET MANAGER**: A service that allows for the secure storage and management of secrets (such as passwords and API keys).
+- **IAM (Identity and Access Management)**: Defines what users and roles can do with AWS resources.
+  - **Role**: An IAM role is an entity that defines a set of permissions to perform actions on AWS resources. Unlike users, roles are not associated with a specific person or account but can be assumed by AWS services, users, or applications. Roles are often used to grant temporary permissions.
+  - **Permission**: Defines what users and roles can do with AWS resources.
 
-- **NAT (Network Address Translation)** : Permet aux instances dans un sous-réseau privé d'accéder à Internet sans exposer leurs adresses IP.
+### Monitoring and Resource Management
+- **CLOUDWATCH**: A monitoring service that collects and tracks metrics, logs, and events for AWS resources.
+  - **Container Insight**: A monitoring tool for containers.
+  - **Logs Groups**: Groups logs for centralized management and analysis.
 
-- **ROUTE (Table de routage)** : Définit les règles de routage pour diriger le trafic entre les sous-réseaux et vers Internet.
+### Storage
+- **S3 (Simple Storage Service)**: An object storage service for storing and retrieving data at any time.
+- **EBS (Elastic Block Store)**: Provides persistent block storage for EC2 instances.
+- **EFS (Elastic File System)**: A scalable file system that can be mounted on multiple EC2 instances.
+- **DLM (Data Lifecycle Manager)**: Automates the management of backups and snapshots for EBS volumes.
 
-- **SECURITY GROUP** : Agit comme un pare-feu virtuel pour contrôler le trafic entrant et sortant des instances.
-
-- **CLOUDMAP** : Service de découverte de services qui permet aux applications de trouver et de se connecter à d'autres services.
-
-- **ROUTE 53** : Service DNS qui permet de gérer les noms de domaine et de diriger le trafic vers les ressources AWS.
-
-- **ECS (Elastic Container Service)** : Service d’orchestration de conteneurs qui facilite le déploiement et la gestion d'applications conteneurisées.
-
-- **Task** : Unité de travail dans ECS qui définit un ensemble de conteneurs à exécuter ensemble.
-
-- **Task Definition** : Modèle qui définit les paramètres pour les tâches ECS, y compris les images de conteneur, les ressources, et les configurations réseau.
-
-- **SECRET MANAGER** : Service qui permet de stocker et de gérer les secrets (comme les mots de passe et les clés API) de manière sécurisée.
-
-- **IAM (Identity and Access Management)** : Gère les utilisateurs, les rôles, et les permissions pour contrôler l'accès aux ressources AWS.
-  - **Permission** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
-
-- **CLOUDWATCH** : Service de surveillance qui collecte et suit les métriques, les journaux, et les événements pour les ressources AWS.
-  - **Container Insight** : Outil de surveillance pour les conteneurs.
-  - **Logs Groups** : Regroupe les journaux pour une gestion et une analyse centralisées.
-
-- **LIGHTSAIL** : Service simplifié pour déployer des applications et des sites Web en utilisant des instances virtuelles.
-
-- **S3 (Simple Storage Service)** : Service de stockage d'objets pour stocker et récupérer des données à tout moment.
-
-- **EBS (Elastic Block Store)** : Fournit un stockage de blocs persistant pour les instances EC2.
-
-- **EFS (Elastic File System)** : Système de fichiers évolutif qui peut être monté sur plusieurs instances EC2.
-
-- **DLM (Data Lifecycle Manager)** : Automatisation de la gestion des sauvegardes et des snapshots pour les volumes EBS.
-  
+### Simplified Services
+- **LIGHTSAIL**: A simplified service for deploying applications and websites using virtual instances.
