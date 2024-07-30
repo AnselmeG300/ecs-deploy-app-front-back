@@ -8,7 +8,7 @@
 - Load Balancing
 - Persistance des données
 
-## Dictionnaires des services :
+## Services :
 - **VPC (Virtual Private Cloud)** : Fournit un réseau isolé dans le cloud, permettant de définir des sous-réseaux, des règles de sécurité, et des connexions à Internet.
   
 - **SUBNET (Sous-réseau)** : Divise un VPC en segments plus petits pour organiser les ressources et gérer la sécurité.
