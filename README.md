@@ -39,10 +39,13 @@
 - **EFS (Elastic File System)** : Système de fichiers évolutif qui peut être monté sur plusieurs instances EC2.
 - **DLM (Data Lifecycle Manager)** : Automatisation de la gestion des sauvegardes et des snapshots pour les volumes EBS.
 
-### Conteneurs et Orchestration
+### Calcul (Conteneurs)
 - **ECS (Elastic Container Service)** : Service d’orchestration de conteneurs qui facilite le déploiement et la gestion d'applications conteneurisées.
+- **Fargate** : est un service de calcul sans serveur qui permet de déployer et de gérer des conteneurs sans avoir à gérer l'infrastructure sous-jacente. Il fonctionne avec des services comme Amazon ECS (Elastic Container Service) et Amazon EKS (Elastic Kubernetes Service).
 - **Task** : Unité de travail dans ECS qui définit un ensemble de conteneurs à exécuter ensemble.
 - **Task Definition** : Modèle qui définit les paramètres pour les tâches ECS, y compris les images de conteneur, les ressources, et les configurations réseau.
+- **Auto Scaling** : Surveille vos applications et ajuste automatiquement la capacité pour maintenir des performances constantes et prévisibles au coût le plus bas possible.
+
 
 ### Surveillance et Gestion des Ressources
 - **CLOUDWATCH** : Service de surveillance qui collecte et suit les métriques, les journaux, et les événements pour les ressources AWS.
