@@ -27,16 +27,16 @@
 - **CLOUDMAP** : Service de découverte de services qui permet aux applications de trouver et de se connecter à d'autres services.
 - **ROUTE 53** : Service DNS qui permet de gérer les noms de domaine et de diriger le trafic vers les ressources AWS.
 
-### Conteneurs et Orchestration
-- **ECS (Elastic Container Service)** : Service d’orchestration de conteneurs qui facilite le déploiement et la gestion d'applications conteneurisées.
-- **Task** : Unité de travail dans ECS qui définit un ensemble de conteneurs à exécuter ensemble.
-- **Task Definition** : Modèle qui définit les paramètres pour les tâches ECS, y compris les images de conteneur, les ressources, et les configurations réseau.
-
 ### Sécurité
 - **SECRET MANAGER** : Service qui permet de stocker et de gérer les secrets (comme les mots de passe et les clés API) de manière sécurisée.
 - **IAM (Identity and Access Management)** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
   - **Rôle** : Un rôle IAM est une entité qui définit un ensemble de permissions pour effectuer des actions sur des ressources AWS. Contrairement aux utilisateurs, les rôles ne sont pas associés à une personne ou un compte spécifique, mais peuvent être assumés par des services AWS, des utilisateurs ou des applications. Les rôles sont souvent utilisés pour accorder des permissions temporaires.
   - **Permission** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
+
+### Conteneurs et Orchestration
+- **ECS (Elastic Container Service)** : Service d’orchestration de conteneurs qui facilite le déploiement et la gestion d'applications conteneurisées.
+- **Task** : Unité de travail dans ECS qui définit un ensemble de conteneurs à exécuter ensemble.
+- **Task Definition** : Modèle qui définit les paramètres pour les tâches ECS, y compris les images de conteneur, les ressources, et les configurations réseau.
 
 ### Surveillance et Gestion des Ressources
 - **CLOUDWATCH** : Service de surveillance qui collecte et suit les métriques, les journaux, et les événements pour les ressources AWS.
