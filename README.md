@@ -32,6 +32,12 @@
 - **IAM (Identity and Access Management)** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
   - **Rôle** : Un rôle IAM est une entité qui définit un ensemble de permissions pour effectuer des actions sur des ressources AWS. Contrairement aux utilisateurs, les rôles ne sont pas associés à une personne ou un compte spécifique, mais peuvent être assumés par des services AWS, des utilisateurs ou des applications. Les rôles sont souvent utilisés pour accorder des permissions temporaires.
   - **Permission** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
+ 
+### Stockage
+- **S3 (Simple Storage Service)** : Service de stockage d'objets pour stocker et récupérer des données à tout moment.
+- **EBS (Elastic Block Store)** : Fournit un stockage de blocs persistant pour les instances EC2.
+- **EFS (Elastic File System)** : Système de fichiers évolutif qui peut être monté sur plusieurs instances EC2.
+- **DLM (Data Lifecycle Manager)** : Automatisation de la gestion des sauvegardes et des snapshots pour les volumes EBS.
 
 ### Conteneurs et Orchestration
 - **ECS (Elastic Container Service)** : Service d’orchestration de conteneurs qui facilite le déploiement et la gestion d'applications conteneurisées.
@@ -43,12 +49,4 @@
   - **Container Insight** : Outil de surveillance pour les conteneurs.
   - **Logs Groups** : Regroupe les journaux pour une gestion et une analyse centralisées.
 
-### Stockage
-- **S3 (Simple Storage Service)** : Service de stockage d'objets pour stocker et récupérer des données à tout moment.
-- **EBS (Elastic Block Store)** : Fournit un stockage de blocs persistant pour les instances EC2.
-- **EFS (Elastic File System)** : Système de fichiers évolutif qui peut être monté sur plusieurs instances EC2.
-- **DLM (Data Lifecycle Manager)** : Automatisation de la gestion des sauvegardes et des snapshots pour les volumes EBS.
-
-### Services Simplifiés
-- **LIGHTSAIL** : Service simplifié pour déployer des applications et des sites Web en utilisant des instances virtuelles.
   
