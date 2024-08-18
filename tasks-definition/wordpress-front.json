@@ -1,0 +1,92 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "wordpress-front",
+            "image": "bitnami/wordpress:6.6.1",
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "MARIADB_HOST",
+                    "value": "wordpress-db.mysql-wordpress"
+                },
+                {
+                    "name": "ECS_RESERVED_MEMORY",
+                    "value": "100"
+                },
+                {
+                    "name": "PHP_MEMORY_LIMIT",
+                    "value": "512M"
+                },
+                {
+                    "name": "enabled",
+                    "value": "false"
+                },
+                {
+                    "name": "WORDPRESS_DATABASE_NAME",
+                    "value": "wordpress-db"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "efs-wordpress-volume",
+                    "containerPath": "/bitnami/wordpress"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "WORDPRESS_DATABASE_USER",
+                    "valueFrom": "arn:aws:secretsmanager:us-west-2:925037323203:secret:wordpress_secrets-P9zkqr:user::"
+                },
+                {
+                    "name": "WORDPRESS_DATABASE_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:us-west-2:925037323203:secret:wordpress_secrets-P9zkqr:password::"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "wordpress-front-container",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "wordpress-front"
+                }
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "wordpress-front",
+    "executionRoleArn": "arn:aws:iam::925037323203:role/ecs-task-role",
+    "networkMode": "awsvpc",
+    "revision": 2,
+    "volumes": [
+        {
+            "name": "efs-wordpress-volume",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-0dab91f40f3c16baf",
+                "transitEncryption": "ENABLED",
+                "authorizationConfig": {
+                    "accessPointId": "fsap-0379570c629271f77",
+                    "iam": "DISABLED"
+                }
+            }
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "tags": [
+        {
+            "key": "Name",
+            "value": "wordpress-prod-task-front"
+        }
+    ]
+}
