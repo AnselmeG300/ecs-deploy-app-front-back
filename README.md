@@ -1,11 +1,11 @@
 # Déploiement d’une App Front & Back sur ECS
 
-![](<Deploy Worspress ECS.png>)
+![](<Architecture App.png>)
 
 ## Coûts estimation :
 
 ## Fonctionnalités :
-- Déploiement d’une application front-end et back-end
+- Déploiement d’une application haute disponible et resiliente à deux niveaux: Couche presentation & metier et couche base de données: Cas de wordpress
 - Auto scaling
 - Load Balancing
 - Persistance des données
@@ -23,8 +23,7 @@
 - **ROUTE (Table de routage)** : Définit les règles de routage pour diriger le trafic entre les sous-réseaux et vers Internet.
 - **SECURITY GROUP** : Agit comme un pare-feu virtuel pour contrôler le trafic entrant et sortant des instances.
 
-### Découverte et Gestion des Services
-- **CLOUDMAP** : Service de découverte de services qui permet aux applications de trouver et de se connecter à d'autres services.
+### Réseau et DNS
 - **ROUTE 53** : Service DNS qui permet de gérer les noms de domaine et de diriger le trafic vers les ressources AWS.
 
 ### Sécurité
@@ -32,12 +31,14 @@
 - **IAM (Identity and Access Management)** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
   - **Rôle** : Un rôle IAM est une entité qui définit un ensemble de permissions pour effectuer des actions sur des ressources AWS. Contrairement aux utilisateurs, les rôles ne sont pas associés à une personne ou un compte spécifique, mais peuvent être assumés par des services AWS, des utilisateurs ou des applications. Les rôles sont souvent utilisés pour accorder des permissions temporaires.
   - **Permission** : Définir ce que les utilisateurs et les rôles peuvent faire avec les ressources AWS.
+- **AWS Certificate Manager (ACM)**: permet de provisionner, gérer et déployer des certificats SSL/TLS publics et privés pour sécuriser les communications avec les services AWS et les ressources internes connectées12.
  
 ### Stockage
 - **S3 (Simple Storage Service)** : Service de stockage d'objets pour stocker et récupérer des données à tout moment.
-- **EBS (Elastic Block Store)** : Fournit un stockage de blocs persistant pour les instances EC2.
 - **EFS (Elastic File System)** : Système de fichiers évolutif qui peut être monté sur plusieurs instances EC2.
-- **DLM (Data Lifecycle Manager)** : Automatisation de la gestion des sauvegardes et des snapshots pour les volumes EBS.
+
+### Base de données
+- **RDS (Relational Database Service)** : Service de base de données relationnelle géré pour MySQL, PostgreSQL, Oracle, SQL Server et MariaDB.
 
 ### Calcul (Conteneurs)
 - **ECS (Elastic Container Service)** : Service d’orchestration de conteneurs qui facilite le déploiement et la gestion d'applications conteneurisées.

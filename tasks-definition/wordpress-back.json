@@ -1,8 +1,10 @@
 {
+    "family": "wordpress-db",
     "containerDefinitions": [
         {
             "name": "wordpress-db",
             "image": "bitnami/mariadb",
+            "cpu": 0,
             "portMappings": [
                 {
                     "containerPort": 3306,
@@ -24,6 +26,7 @@
                     "readOnly": false
                 }
             ],
+            "volumesFrom": [],
             "secrets": [
                 {
                     "name": "MARIADB_USER",
@@ -47,13 +50,12 @@
                     "awslogs-region": "us-west-2",
                     "awslogs-stream-prefix": "wordpress-db"
                 }
-            }
+            },
+            "systemControls": []
         }
     ],
-    "family": "wordpress-db",
     "executionRoleArn": "arn:aws:iam::925037323203:role/ecs-task-role",
     "networkMode": "awsvpc",
-    "revision": 2,
     "volumes": [
         {
             "name": "ebs-wordpress-volume",

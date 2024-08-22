@@ -1,8 +1,10 @@
 {
+    "family": "wordpress-front",
     "containerDefinitions": [
         {
             "name": "wordpress-front",
             "image": "bitnami/wordpress:6.6.1",
+            "cpu": 0,
             "portMappings": [
                 {
                     "containerPort": 8080,
@@ -30,7 +32,7 @@
                 },
                 {
                     "name": "WORDPRESS_DATABASE_NAME",
-                    "value": "wordpress-db"
+                    "value": "database-rds-worpress.endpoint.proxy-cisbthdgs5n7.us-west-2.rds.amazonaws.com"
                 }
             ],
             "mountPoints": [
@@ -39,10 +41,11 @@
                     "containerPath": "/bitnami/wordpress"
                 }
             ],
+            "volumesFrom": [],
             "secrets": [
                 {
                     "name": "WORDPRESS_DATABASE_USER",
-                    "valueFrom": "arn:aws:secretsmanager:us-west-2:925037323203:secret:wordpress_secrets-P9zkqr:user::"
+                    "valueFrom": "arn:aws:secretsmanager:us-west-2:925037323203:secret:wordpress_secrets-P9zkqr:username::"
                 },
                 {
                     "name": "WORDPRESS_DATABASE_PASSWORD",
@@ -61,15 +64,14 @@
             "systemControls": []
         }
     ],
-    "family": "wordpress-front",
-    "executionRoleArn": "arn:aws:iam::925037323203:role/ecs-task-role",
+    "executionRoleArn": "arn:aws:iam::925037323203:role/ecs-task-role_new",
     "networkMode": "awsvpc",
-    "revision": 2,
     "volumes": [
         {
             "name": "efs-wordpress-volume",
             "efsVolumeConfiguration": {
                 "fileSystemId": "fs-0dab91f40f3c16baf",
+                "rootDirectory": "/",
                 "transitEncryption": "ENABLED",
                 "authorizationConfig": {
                     "accessPointId": "fsap-0379570c629271f77",
