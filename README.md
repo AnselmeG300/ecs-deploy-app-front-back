@@ -1,4 +1,4 @@
-# Déploiement d’une App Front & Back sur ECS
+# Déploiement d’une App sur ECS et RDS
 
 ![](<Architecture App.png>)
 
