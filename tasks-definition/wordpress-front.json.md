@@ -1,82 +1,44 @@
-Voici une explication de chaque propriété de la définition de tâche AWS ECS:
+Voici une explication détaillée de la configuration de la tâche ECS (Elastic Container Service) pour WordPress :
 
-### `containerDefinitions`
-- **name**: Nom du conteneur, ici "wordpress-front".
-- **image**: Image Docker utilisée, ici "bitnami/wordpress".
-- **cpu**: Quantité de CPU allouée au conteneur. Ici, 0 signifie qu'il n'y a pas de réservation spécifique.
-- **portMappings**: Mappage des ports entre le conteneur et l'hôte.
-  - **containerPort**: Port utilisé dans le conteneur, ici 8080.
-  - **hostPort**: Port utilisé sur l'hôte, ici 8080.
-  - **protocol**: Protocole utilisé, ici TCP.
-- **essential**: Indique si ce conteneur est essentiel pour la tâche. Si ce conteneur échoue, la tâche échoue également.
-- **environment**: Variables d'environnement pour le conteneur.
-  - **MARIADB_HOST**: Hôte de la base de données MariaDB.
-  - **ECS_RESERVED_MEMORY**: Mémoire réservée pour ECS.
-  - **PHP_MEMORY_LIMIT**: Limite de mémoire pour PHP.
-  - **enabled**: Variable personnalisée, ici désactivée.
-  - **WORDPRESS_DATABASE_NAME**: Nom de la base de données WordPress.
-- **mountPoints**: Points de montage pour les volumes.
-  - **sourceVolume**: Nom du volume source, ici "efs-wordpress-volume".
-  - **containerPath**: Chemin dans le conteneur où le volume est monté, ici "/bitnami/wordpress".
-- **volumesFrom**: Volumes hérités d'autres conteneurs (vide ici).
-- **secrets**: Secrets gérés par AWS Secrets Manager.
-  - **WORDPRESS_DATABASE_USER**: Utilisateur de la base de données WordPress.
-  - **WORDPRESS_DATABASE_PASSWORD**: Mot de passe de la base de données WordPress.
-- **user**: Utilisateur sous lequel le conteneur s'exécute, ici "root".
-- **logConfiguration**: Configuration des logs.
-  - **logDriver**: Pilote de logs utilisé, ici "awslogs".
-  - **options**: Options pour la configuration des logs.
-    - **awslogs-group**: Groupe de logs AWS.
-    - **awslogs-create-group**: Indique si le groupe de logs doit être créé.
-    - **awslogs-region**: Région AWS pour les logs.
-    - **awslogs-stream-prefix**: Préfixe pour les flux de logs.
-- **systemControls**: Contrôles système (vide ici).
+## Définition de la tâche
 
-### `family`
-Nom de la famille de tâches, ici "wordpress-front".
+- `family` : Le nom de la définition de tâche, ici "wordpress-front".
+- `containerDefinitions` : Définit les conteneurs qui composent la tâche.
 
-### `executionRoleArn`
-ARN du rôle d'exécution IAM utilisé par la tâche.
+## Définition du conteneur
 
-### `networkMode`
-Mode réseau utilisé par la tâche, ici "awsvpc".
+- `name` : Le nom du conteneur, ici "wordpress-front".
+- `image` : L'image Docker utilisée pour le conteneur, ici "wordpress:6.5.5-php8.1-apache".
+- `cpu` : La quantité de CPU allouée au conteneur, ici 0 (illimité).
+- `portMappings` : Mappe le port 80 du conteneur au port 80 de l'hôte en utilisant le protocole TCP.
+- `essential` : Indique que ce conteneur est essentiel pour le bon fonctionnement de la tâche.
+- `user` : Spécifie l'utilisateur qui exécute le conteneur, ici "root".
+- `environment` : Définit les variables d'environnement pour le conteneur :
+  - `ECS_RESERVED_MEMORY` : Réserve 100 Mo de mémoire pour le conteneur.
+  - `WORDPRESS_DB_HOST` : L'hôte de la base de données, ici un proxy RDS.
+  - `WORDPRESS_DB_NAME` : Le nom de la base de données WordPress.
+  - `PHP_MEMORY_LIMIT` : La limite de mémoire PHP, ici 512 Mo.
+- `mountPoints` : Monte le volume "efs-wordpress-volume" dans le répertoire "/bitnami/wordpress" du conteneur.
+- `secrets` : Récupère les secrets pour l'utilisateur et le mot de passe de la base de données à partir d'AWS Secrets Manager.
+- `logConfiguration` : Configure la journalisation des logs du conteneur avec le pilote "awslogs" et les options appropriées.
 
-### `revision`
-Numéro de révision de la définition de tâche, ici 2.
+## Volumes
 
-### `volumes`
-Volumes utilisés par la tâche.
-- **name**: Nom du volume, ici "efs-wordpress-volume".
-- **efsVolumeConfiguration**: Configuration du volume EFS.
-  - **fileSystemId**: ID du système de fichiers EFS.
-  - **rootDirectory**: Répertoire racine du volume.
-  - **transitEncryption**: Chiffrement en transit, ici activé.
-  - **authorizationConfig**: Configuration de l'autorisation.
-    - **accessPointId**: ID du point d'accès.
-    - **iam**: Indique si IAM est utilisé pour l'autorisation, ici désactivé.
+- `volumes` : Définit un volume nommé "efs-wordpress-volume" utilisant Amazon EFS (Elastic File System) :
+  - `fileSystemId` : L'ID du système de fichiers EFS.
+  - `rootDirectory` : Le répertoire racine du volume, ici "/".
+  - `transitEncryption` : Active le chiffrement en transit pour le volume EFS.
+  - `authorizationConfig` : Configure l'autorisation d'accès au volume EFS :
+    - `accessPointId` : L'ID du point d'accès EFS.
+    - `iam` : Désactive l'authentification IAM pour le point d'accès.
 
-### `placementConstraints`
-Contraintes de placement pour la tâche (vide ici).
+## Autres paramètres
 
-### `compatibilities`
-Compatibilités de la tâche, ici "EC2" et "FARGATE".
+- `executionRoleArn` : L'ARN (Amazon Resource Name) du rôle d'exécution de la tâche.
+- `networkMode` : Le mode réseau utilisé par la tâche, ici "awsvpc".
+- `requiresCompatibilities` : Les types de lancement compatibles avec la tâche, ici "FARGATE".
+- `cpu` : La quantité de CPU allouée à la tâche, ici 1024 (1 vCPU).
+- `memory` : La quantité de mémoire allouée à la tâche, ici 2048 Mo (2 Go).
+- `tags` : Ajoute une étiquette "Name" avec la valeur "wordpress-prod-task-front" à la tâche.
 
-### `requiresCompatibilities`
-Compatibilités requises pour la tâche, ici "FARGATE".
-
-### `cpu`
-Quantité de CPU allouée à la tâche, ici 1024 unités (1 vCPU).
-
-### `memory`
-Quantité de mémoire allouée à la tâche, ici 2048 Mo (2 Go).
-
-### `registeredAt`
-Date et heure d'enregistrement de la définition de tâche.
-
-### `registeredBy`
-ARN de l'utilisateur qui a enregistré la définition de tâche.
-
-### `tags`
-Étiquettes associées à la tâche.
-- **key**: Clé de l'étiquette, ici "Name".
-- **value**: Valeur de l'étiquette, ici "wordpress-prod-task-front".
+Cette configuration permet de déployer un conteneur WordPress sur AWS Fargate, en utilisant un volume EFS pour stocker les fichiers WordPress, en se connectant à une base de données via un proxy RDS, et en utilisant des secrets pour les informations d'identification de la base de données.
