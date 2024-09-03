@@ -6,7 +6,7 @@
 - Architecture: https://drive.google.com/file/d/1EftYPTsWWe1vj_wZV1dWnusNF1EJ4KVw/view?usp=sharing
 - ALB Access Logs: https://docs.aws.amazon.com/fr_fr/elasticloadbalancing/latest/application/enable-access-logging.html
 
-## Coûts estimation :
+## Coûts estimation : ![](<Estimation.pdf>)
 
 ## Fonctionnalités :
 - Déploiement d’une application haute disponible et resiliente à deux niveaux: Couche presentation & metier et couche base de données: Cas de wordpress

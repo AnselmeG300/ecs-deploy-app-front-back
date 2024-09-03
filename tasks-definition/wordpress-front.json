@@ -1,5 +1,5 @@
 {
-    "family": "wordpress-front",
+    "family": "wordpress-front-new",
     "containerDefinitions": [
         {
             "name": "wordpress-front",
