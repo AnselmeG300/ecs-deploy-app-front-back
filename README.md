@@ -1,5 +1,5 @@
 
-# Déploiement d’une App sur ECS et RDS et rds
+# Déploiement d’une App sur ECS et RDS
 
 ![](<Architecture App.png>)
 
